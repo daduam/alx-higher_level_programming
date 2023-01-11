@@ -23,7 +23,7 @@ void print_python_bytes(PyObject *p)
 	count = PyBytes_Size(p) < 10 ? PyBytes_Size(p) + 1 : 10;
 	printf("  first %zu bytes:", count);
 	for (i = 0; i < count; i++)
-		printf(" %02x", pb->ob_sval[i]);
+		printf(" %02x", pb->ob_sval[i] & 0xff);
 	printf("\n");
 }
 
