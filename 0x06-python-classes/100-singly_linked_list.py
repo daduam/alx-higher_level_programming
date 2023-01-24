@@ -1,12 +1,13 @@
 #!/usr/bin/python3
-"""Singly Linked List"""
+"""Singly Linked List module"""
 
 
 class Node:
     """Defines a node of a singly linked list"""
 
     def __init__(self, data, next_node=None):
-        """Initialize a node of a singly linked list
+        """
+        Initialize a node of a singly linked list
 
         Args:
             data (int): Data.
@@ -45,12 +46,12 @@ class SinglyLinkedList:
 
     def __init__(self):
         """Initializes the head of the singly linked list"""
-        self.__head = None
+        self.head = None
 
     def __str__(self):
         """String representation of singly linked list"""
         result = ""
-        current = self.__head
+        current = self.head
         while current:
             result += "{:d}".format(current.data)
             if current.next_node:
@@ -61,14 +62,14 @@ class SinglyLinkedList:
     def sorted_insert(self, value):
         """Inserts a new node into the correct sorted position in the list"""
         new_node = Node(value)
-        if self.__head is None:
-            new_node.next_node = self.__head
-            self.__head = new_node
-        elif self.__head.data >= value:
-            new_node.next_node = self.__head
-            self.__head = new_node
+        if self.head is None:
+            new_node.next_node = self.head
+            self.head = new_node
+        elif self.head.data >= value:
+            new_node.next_node = self.head
+            self.head = new_node
         else:
-            current = self.__head
+            current = self.head
             while current.next_node and current.next_node.data < value:
                 current = current.next_node
             new_node.next_node = current.next_node
