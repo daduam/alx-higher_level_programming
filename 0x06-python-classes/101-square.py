@@ -13,8 +13,8 @@ class Square:
             size (:obj:`int`, optional): Size of the square.
             position (:obj:`(int,int)`, optional): Coordinates of a square.
         """
-        self.__size = size
-        self.__position = position
+        self.size = size
+        self.position = position
 
     def area(self):
         """
