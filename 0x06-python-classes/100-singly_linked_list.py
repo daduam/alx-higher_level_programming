@@ -52,7 +52,9 @@ class SinglyLinkedList:
         result = ""
         current = self.__head
         while current:
-            result += "{:d}\n".format(current.data)
+            result += "{:d}".format(current.data)
+            if current.next_node:
+                result += "\n"
             current = current.next_node
         return result
 
