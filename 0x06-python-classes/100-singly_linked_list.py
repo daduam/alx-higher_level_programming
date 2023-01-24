@@ -64,13 +64,11 @@ class SinglyLinkedList:
         new_node = Node(value)
         if current is None:
             self.__head = new_node
-        elif current.data > value:
+        elif current.data >= value:
             new_node.next_node = current
             self.__head = new_node
         else:
-            while current.next_node is not None:
-                if current.next_node.data > value:
-                    break
+            while current.next_node and current.next_node.data < value:
                 current = current.next_node
             new_node.next_node = current.next_node
             current.next_node = new_node
