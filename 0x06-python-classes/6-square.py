@@ -57,8 +57,13 @@ class Square:
 
     @property
     def position(self):
-        """Getter for position"""
-        return self.position
+        """
+        Getter for position.
+
+        Returns:
+            The coordinates of the square.
+        """
+        return self.__position
 
     @position.setter
     def position(self, value):

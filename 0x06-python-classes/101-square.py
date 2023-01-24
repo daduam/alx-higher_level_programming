@@ -45,22 +45,17 @@ class Square:
 
     def my_print(self):
         """Print an ascii representation of the square to stdout"""
-        if self.__size == 0:
-            print()
-        else:
-            for _ in range(self.__position[1]):
-                print()
-            for i in range(self.__size):
-                for x in range(self.__position[0]):
-                    print(" ", end="")
-                for j in range(self.__size):
-                    print("#", end="")
-                print()
+        print(self)
 
     @property
     def position(self):
-        """Getter for position"""
-        return self.position
+        """
+        Getter for position.
+
+        Returns:
+            The coordinates of the square.
+        """
+        return self.__position
 
     @position.setter
     def position(self, value):
