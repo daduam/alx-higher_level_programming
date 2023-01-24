@@ -6,7 +6,8 @@ class Square:
     """Defines a square"""
 
     def __init__(self, size=0, position=(0, 0)):
-        """Initialize the square with a size.
+        """
+        Initialize the square with a size.
 
         Args:
             size (:obj:`int`, optional): Size of the square.
@@ -16,7 +17,8 @@ class Square:
         self.__position = position
 
     def area(self):
-        """Calculates the current square area.
+        """
+        Calculates the current square area.
 
         Returns:
             The current square area.
@@ -70,6 +72,7 @@ class Square:
             or any(i < 0 for i in value)
         ):
             raise TypeError("position must be a tuple of 2 positive integers")
+        self.__position = value
 
     def __str__(self):
         """String representation of a square"""
