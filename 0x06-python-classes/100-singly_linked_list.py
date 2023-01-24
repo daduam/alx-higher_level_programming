@@ -51,11 +51,9 @@ class SinglyLinkedList:
         """String representation of singly linked list"""
         result = ""
         current = self.__head
-        while current is not None:
-            result += "{:d}".format(current.data)
+        while current:
+            result += "{:d}\n".format(current.data)
             current = current.next_node
-            if current is not None:
-                result += "\n"
         return result
 
     def sorted_insert(self, value):
