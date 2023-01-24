@@ -45,7 +45,10 @@ class Square:
 
     def my_print(self):
         """Print an ascii representation of the square to stdout"""
-        print(self)
+        if self.__size == 0:
+            print()
+        else:
+            print(self)
 
     @property
     def position(self):
