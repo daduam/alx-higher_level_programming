@@ -60,14 +60,14 @@ class SinglyLinkedList:
 
     def sorted_insert(self, value):
         """Inserts a new node into the correct sorted position in the list"""
-        current = self.__head
         new_node = Node(value)
-        if current is None:
+        if self.__head is None:
             self.__head = new_node
-        elif current.data >= value:
-            new_node.next_node = current
+        elif self.__head.data >= value:
+            new_node.next_node = self.__head
             self.__head = new_node
         else:
+            current = self.__head
             while current.next_node and current.next_node.data < value:
                 current = current.next_node
             new_node.next_node = current.next_node
