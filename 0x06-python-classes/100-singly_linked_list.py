@@ -13,8 +13,8 @@ class Node:
             data (int): Data.
             next_node (:obj:`Node`, optional): Next linkedlist node.
         """
-        self.__data = data
-        self.__next_node = next_node
+        self.data = data
+        self.next_node = next_node
 
     @property
     def data(self):
