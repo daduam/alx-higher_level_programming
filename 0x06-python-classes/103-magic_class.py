@@ -6,12 +6,12 @@ import math
 class MagicClass:
     """Defines magic class"""
 
-    def __init__(self, radius):
+    def __init__(self, radius=0):
         """
         Initializes a magic class instance.
 
         Args:
-            radius (int|float): Radius of the circle.
+            radius (:obj:int|float, optional): Radius of the circle.
         """
         self.__radius = 0
         if type(radius) is not int and type(radius) is not float:
