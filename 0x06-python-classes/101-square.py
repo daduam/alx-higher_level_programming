@@ -48,7 +48,7 @@ class Square:
         if self.__size == 0:
             print()
         else:
-            print(self)
+            print(self.__str__())
 
     @property
     def position(self):
