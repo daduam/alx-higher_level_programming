@@ -7,6 +7,19 @@ def text_indentation(text):
     characters: ., ? and :
 
     Args:
+        text (str): Text to transform and print.
+
     Raises:
+        TypeError: If `text` is not a string.
     """
-    pass
+    if type(text) != str:
+        raise TypeError("text must be a string")
+
+    buf = ""
+    for ch in text:
+        buf += ch
+        if ch in ".?:":
+            print(buf.strip(), end="\n\n")
+            buf = ""
+    if buf != "":
+        print(buf.strip(), end="")
