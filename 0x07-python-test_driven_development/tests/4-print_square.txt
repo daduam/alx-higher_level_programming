@@ -1,8 +1,8 @@
-The ``Say My Name`` module
-=============================
+The ``Print Square`` module
+===========================
 
-Using ``say_my_name``
-------------------------
+Using ``print_square``
+----------------------
 
 >>> print_square = __import__('4-print_square').print_square
 
