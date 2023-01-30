@@ -1,0 +1,29 @@
+The ``Add Integer`` module
+==========================
+
+Using ``add_integer``
+---------------------
+
+    >>> add_integer = __import__("0-add_integer").add_integer
+
+    >>> add_integer(4, 5)
+    9
+
+    >>> add_integer(4.2, 5.7)
+    9
+
+    >>> add_integer(4.2, 5)
+    9
+
+    >>> add_integer(2)
+    100
+
+    >>> add_integer("45", 5)
+    Traceback (most recent call last):
+        ...
+    TypeError: a must be an integer
+
+    >>> add_integer(2, "fad")
+    Traceback (most recent call last):
+        ...
+    TypeError: b must be an integer
