@@ -40,3 +40,13 @@ NameError: name 'my_list2' is not defined
 >>> my_list = MyList([])
 >>> my_list.print_sorted()
 []
+
+>>> MyList = __import__('1-my_list').MyList
+>>> my_list = MyList()
+>>> my_list.append(7)
+>>> my_list.append(2)
+>>> my_list.append(-2)
+>>> my_list.append(57)
+>>> my_list.append(-45)
+>>> my_list.print_sorted()
+[-45, -2, 2, 7, 57]
