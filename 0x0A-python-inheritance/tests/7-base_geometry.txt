@@ -21,13 +21,13 @@ Exception: area() is not implemented
 >>> base_geom.integer_validator()
 Traceback (most recent call last):
   ...
-TypeError: BaseGeometry.integer_validator() missing 2 required positional arguments: 'name' and 'value'
+TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
 
 >>> base_geom = BaseGeometry()
 >>> base_geom.integer_validator("age")
 Traceback (most recent call last):
   ...
-TypeError: BaseGeometry.integer_validator() missing 1 required positional argument: 'value'
+TypeError: integer_validator() missing 1 required positional argument: 'value'
 
 >>> base_geom = BaseGeometry()
 >>> base_geom.integer_validator("age", 6)
@@ -61,19 +61,19 @@ ValueError: age must be greater than 0
 >>> base_geom.integer_validator("age", 6, 76)
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
-TypeError: BaseGeometry.integer_validator() takes 3 positional arguments but 4 were given
+TypeError: integer_validator() takes 3 positional arguments but 4 were given
 
 >>> base_geom = BaseGeometry()
 >>> base_geom.area(1)
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
-TypeError: BaseGeometry.area() takes 1 positional argument but 2 were given
+TypeError: area() takes 1 positional argument but 2 were given
 
 >>> base_geom = BaseGeometry()
 >>> base_geom.area(1, 2)
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
-TypeError: BaseGeometry.area() takes 1 positional argument but 3 were given
+TypeError: area() takes 1 positional argument but 3 were given
 
 >>> base_geom = BaseGeometry()
 >>> base_geom.integer_validator("age", (1, 2))
