@@ -10,3 +10,9 @@ Using ``BaseGeometry``
 Traceback (most recent call last):
   ...
 TypeError: BaseGeometry() takes no arguments
+
+>>> geom = BaseGeometry()
+>>> geom.area()
+Traceback (most recent call last):
+  ...
+Exception: area() is not implemented
