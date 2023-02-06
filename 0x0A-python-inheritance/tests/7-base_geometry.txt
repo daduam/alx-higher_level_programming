@@ -39,7 +39,62 @@ Traceback (most recent call last):
 TypeError: age must be an integer
 
 >>> geom = BaseGeometry()
+>>> geom.integer_validator("age", False)
+Traceback (most recent call last):
+  ...
+TypeError: age must be an integer
+
+>>> geom = BaseGeometry()
 >>> geom.integer_validator("age", -5)
 Traceback (most recent call last):
   ...
 ValueError: age must be greater than 0
+
+
+>>> geom = BaseGeometry()
+>>> geom.integer_validator("age", 0)
+Traceback (most recent call last):
+  ...
+ValueError: age must be greater than 0
+
+>>> geom = BaseGeometry()
+>>> geom.integer_validator("age", 6, 76)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: BaseGeometry.integer_validator() takes 3 positional arguments but 4 were given
+
+>>> geom = BaseGeometry()
+>>> geom.area(1)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: BaseGeometry.area() takes 1 positional argument but 2 were given
+
+>>> geom = BaseGeometry()
+>>> geom.area(1, 2)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: BaseGeometry.area() takes 1 positional argument but 3 were given
+
+>>> geom = BaseGeometry()
+>>> geom.integer_validator("age", (1, 2))
+Traceback (most recent call last):
+  ...
+TypeError: age must be an integer
+
+>>> geom = BaseGeometry()
+>>> geom.integer_validator("age", [1])
+Traceback (most recent call last):
+  ...
+TypeError: age must be an integer
+
+>>> geom = BaseGeometry()
+>>> geom.integer_validator("age", {1, 2})
+Traceback (most recent call last):
+  ...
+TypeError: age must be an integer
+
+>>> geom = BaseGeometry()
+>>> geom.integer_validator("age", None)
+Traceback (most recent call last):
+  ...
+TypeError: age must be an integer
