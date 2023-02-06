@@ -5,3 +5,8 @@ Using ``BaseGeometry``
 ---------------------
 
 >>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+
+>>> geom = BaseGeometry(65)
+Traceback (most recent call last):
+  ...
+TypeError: BaseGeometry() takes no arguments
