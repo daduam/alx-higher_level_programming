@@ -5,8 +5,8 @@
 def display_stats(fsize, status_codes):
     """Print stats so far"""
     print("File size: {}".format(fsize))
-    for status_code in sorted(status_codes):
-        print("{}: {}".format(status_code, status_codes[status_code]))
+    for k, v in sorted(status_codes.items()):
+        print("{}: {}".format(k, v))
 
 
 if __name__ == "__main__":
@@ -23,7 +23,7 @@ if __name__ == "__main__":
             try:
                 file_size, status_code = int(line[-1]), line[-2]
                 fsize += file_size
-                if not status_code in status_codes:
+                if status_code not in status_codes:
                     status_codes[status_code] = 0
                 status_codes[status_code] += 1
                 if lineno == 10:
