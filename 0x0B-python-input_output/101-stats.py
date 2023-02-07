@@ -31,6 +31,7 @@ if __name__ == "__main__":
                     lineno = 0
             except (IndexError, ValueError):
                 pass
+        display_stats(fsize, status_codes)
     except KeyboardInterrupt:
         display_stats(fsize, status_codes)
         raise
