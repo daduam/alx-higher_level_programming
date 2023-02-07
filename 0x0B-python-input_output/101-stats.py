@@ -2,31 +2,36 @@
 """101-stats"""
 
 
-def display_stats(stats):
+def display_stats(fsize, status_codes):
     """Print stats so far"""
-    print("File size: {}".format(stats['fsize']))
-    for status_code in sorted(stats['status_codes']):
-        print("{}: {}".format(status_code, stats['status_codes'][status_code]))
+    print("File size: {}".format(fsize))
+    for status_code in sorted(status_codes):
+        print("{}: {}".format(status_code, status_codes[status_code]))
 
 
 if __name__ == "__main__":
     import sys
 
     lineno = 0
-    stats = {'fsize': 0, 'status_codes': {}}
+    fsize = 0
+    status_codes = {}
 
     try:
         for line in sys.stdin:
             lineno += 1
             line = line.split()
-            file_size, status_code = int(line[-1]), line[-2]
-            stats['fsize'] += file_size
-            if not status_code in stats['status_codes']:
-                stats['status_codes'][status_code] = 0
-            stats['status_codes'][status_code] += 1
+            file_size, status_code = 0,  ""
+            try:
+                file_size, status_code = int(line[-1]), line[-2]
+            except (IndexError, ValueError):
+                pass
+            fsize += file_size
+            if not status_code in status_codes:
+                status_codes[status_code] = 0
+            status_codes[status_code] += 1
             if lineno == 10:
-                display_stats(stats)
+                display_stats(fsize, status_codes)
                 lineno = 0
     except KeyboardInterrupt:
-        display_stats(stats)
+        display_stats(fsize, status_codes)
         raise
