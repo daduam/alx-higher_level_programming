@@ -20,18 +20,17 @@ if __name__ == "__main__":
         for line in sys.stdin:
             lineno += 1
             line = line.split()
-            file_size, status_code = 0,  ""
             try:
                 file_size, status_code = int(line[-1]), line[-2]
+                fsize += file_size
+                if not status_code in status_codes:
+                    status_codes[status_code] = 0
+                status_codes[status_code] += 1
+                if lineno == 10:
+                    display_stats(fsize, status_codes)
+                    lineno = 0
             except (IndexError, ValueError):
                 pass
-            fsize += file_size
-            if not status_code in status_codes:
-                status_codes[status_code] = 0
-            status_codes[status_code] += 1
-            if lineno == 10:
-                display_stats(fsize, status_codes)
-                lineno = 0
     except KeyboardInterrupt:
         display_stats(fsize, status_codes)
         raise
