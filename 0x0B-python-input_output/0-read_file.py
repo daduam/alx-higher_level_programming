@@ -1,4 +1,4 @@
-# /usr/bin/python3
+#!/usr/bin/python3
 """0-read_file"""
 
 
@@ -11,5 +11,5 @@ def read_file(filename=""):
             Defaults to an empty string.
     """
     with open(filename, "r", encoding="utf-8") as f:
-        data = f.read()
-        print(data, end="")
+        for line in f:
+            print(line, end="")
