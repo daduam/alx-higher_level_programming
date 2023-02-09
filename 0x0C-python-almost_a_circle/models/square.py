@@ -36,6 +36,13 @@ class Square(Rectangle):
             return self.__update(*args)
         self.__update(**kwargs)
 
+    def to_dictionary(self):
+        """Returns dictionary representation of a Square."""
+        return {"id": self.id,
+                "size": self.size,
+                "x": self.x,
+                "y": self.y}
+
     def __str__(self):
         """Returns a string representation of the square instance."""
         return "[{}] ({}) {}/{} - {}".format(Square.__name__,
