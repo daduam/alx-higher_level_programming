@@ -78,6 +78,18 @@ class Rectangle(Base):
         print("\n" * self.__y +
               "\n".join([" " * self.__x + "#" * self.__width] * self.__height))
 
+    def __update(self, id=None, width=None, height=None, x=None, y=None):
+        """Helper method for update."""
+        self.id = id or self.id
+        self.width = width or self.__width
+        self.height = height or self.__height
+        self.x = x or self.__x
+        self.y = y or self.__y
+
+    def update(self, *args):
+        """Assigns an argument to each attribute."""
+        self.__update(*args)
+
     def __str__(self):
         """Returns a string representation of the rectangle instance."""
         return "[{}] ({}) {}/{} - {}/{}".format(Rectangle.__name__,
