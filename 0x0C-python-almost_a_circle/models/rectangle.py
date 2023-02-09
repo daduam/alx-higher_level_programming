@@ -86,9 +86,11 @@ class Rectangle(Base):
         self.x = x or self.__x
         self.y = y or self.__y
 
-    def update(self, *args):
+    def update(self, *args, **kwargs):
         """Assigns an argument to each attribute."""
-        self.__update(*args)
+        if args:
+            return self.__update(*args)
+        self.__update(**kwargs)
 
     def __str__(self):
         """Returns a string representation of the rectangle instance."""
