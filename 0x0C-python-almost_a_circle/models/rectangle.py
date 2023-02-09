@@ -24,6 +24,7 @@ class Rectangle(Base):
     @width.setter
     def width(self, value):
         """Setter for width"""
+        self.__validate_dimen("width", value)
         self.__width = value
 
     @property
@@ -34,6 +35,7 @@ class Rectangle(Base):
     @height.setter
     def height(self, value):
         """Setter for height"""
+        self.__validate_dimen("height", value)
         self.__height = value
 
     @property
@@ -44,6 +46,7 @@ class Rectangle(Base):
     @x.setter
     def x(self, value):
         """Setter for x"""
+        self.__validate_dimen("x", value, excludes_zero=False)
         self.__x = value
 
     @property
@@ -54,4 +57,14 @@ class Rectangle(Base):
     @y.setter
     def y(self, value):
         """Setter for y"""
+        self.__validate_dimen("y", value, excludes_zero=False)
         self.__y = value
+
+    def __validate_dimen(self, name, value, excludes_zero=True):
+        """Validates dimensions"""
+        if type(value) != int:
+            raise TypeError("{} must be an integer".format(name))
+        if excludes_zero and value <= 0:
+            raise ValueError("{} must be > 0".format(name))
+        if not excludes_zero and value < 0:
+            raise ValueError("{} must be >= 0".format(name))
