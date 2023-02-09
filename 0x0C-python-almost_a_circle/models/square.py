@@ -23,6 +23,19 @@ class Square(Rectangle):
         self.width = value
         self.height = value
 
+    def __update(self, id=None, size=None, x=None, y=None):
+        """Helper method for update."""
+        self.id = id or self.id
+        self.size = size or self.size
+        self.x = x or self.x
+        self.y = y or self.y
+
+    def update(self, *args, **kwargs):
+        """Assigns an argument to each attribute."""
+        if args:
+            return self.__update(*args)
+        self.__update(**kwargs)
+
     def __str__(self):
         """Returns a string representation of the square instance."""
         return "[{}] ({}) {}/{} - {}".format(Square.__name__,
