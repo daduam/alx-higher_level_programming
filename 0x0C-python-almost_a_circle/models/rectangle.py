@@ -75,7 +75,8 @@ class Rectangle(Base):
 
     def display(self):
         """Prints the rectangle instance to stdout with the character #."""
-        print("".join(["#"*self.__width + "\n"] * self.__height), end="")
+        print("\n" * self.__y +
+              "\n".join([" " * self.__x + "#" * self.__width] * self.__height))
 
     def __str__(self):
         """Returns a string representation of the rectangle instance."""
