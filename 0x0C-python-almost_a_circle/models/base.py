@@ -91,8 +91,6 @@ class Base:
             with open(filename, "r") as csvf:
                 reader = csv.DictReader(csvf)
                 for row in reader:
-                    dictionary = {}
-                    for key in fieldnames:
-                        dictionary[key] = int(row[key])
+                    dictionary = {key: int(row[key]) for key in fieldnames}
                     instances.append(cls.create(**dictionary))
         return instances
