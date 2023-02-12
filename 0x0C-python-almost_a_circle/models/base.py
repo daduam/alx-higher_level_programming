@@ -3,6 +3,7 @@
 
 
 import json
+import os
 
 
 class Base:
@@ -43,6 +44,20 @@ class Base:
     @classmethod
     def create(cls, **dictionary):
         """Creates an instance of cls with attributes from dictionary."""
-        dummy = cls(1, 1)
+        if cls.__name__ == "Rectangle":
+            dummy = cls(1, 1)
+        elif cls.__name__ == "Square":
+            dummy = cls(1)
         dummy.update(**dictionary)
         return dummy
+
+    @classmethod
+    def load_from_file(cls):
+        """Returns a list of instances of cls from file."""
+        filename = "{}.json".format(cls.__name__)
+        instances = []
+        if os.path.isfile(filename):
+            with open(filename, "r") as f:
+                for dictionary in cls.from_json_string(f.read()):
+                    instances.append(cls.create(**dictionary))
+        return instances
