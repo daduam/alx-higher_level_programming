@@ -39,3 +39,10 @@ class Base:
             list_dictionaries = [obj.to_dictionary() for obj in list_objs]
         with open("{}.json".format(cls.__name__), "w") as f:
             f.write(cls.to_json_string(list_dictionaries))
+
+    @classmethod
+    def create(cls, **dictionary):
+        """Creates an instance of cls with attributes from dictionary."""
+        dummy = cls(1, 1)
+        dummy.update(**dictionary)
+        return dummy
