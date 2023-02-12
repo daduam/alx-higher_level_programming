@@ -4,6 +4,7 @@
 
 import json
 import os
+import csv
 
 
 class Base:
@@ -59,5 +60,39 @@ class Base:
         if os.path.isfile(filename):
             with open(filename, "r") as f:
                 for dictionary in cls.from_json_string(f.read()):
+                    instances.append(cls.create(**dictionary))
+        return instances
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """Saves instances to a csv file."""
+        list_dictionaries, fieldnames = [], []
+        if list_objs:
+            list_dictionaries = [obj.to_dictionary() for obj in list_objs]
+        if cls.__name__ == "Rectangle":
+            fieldnames = ['id', 'width', 'height', 'x', 'y']
+        elif cls.__name__ == "Square":
+            fieldnames = ['id', 'size', 'x', 'y']
+        with open("{}.csv".format(cls.__name__), "w") as csvf:
+            writer = csv.DictWriter(csvf, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(list_dictionaries)
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """Loads instances from a csv file."""
+        filename = "{}.csv".format(cls.__name__)
+        instances, fieldnames = [], []
+        if cls.__name__ == "Rectangle":
+            fieldnames = ['id', 'width', 'height', 'x', 'y']
+        elif cls.__name__ == "Square":
+            fieldnames = ['id', 'size', 'x', 'y']
+        if os.path.isfile(filename):
+            with open(filename, "r") as csvf:
+                reader = csv.DictReader(csvf)
+                for row in reader:
+                    dictionary = {}
+                    for key in fieldnames:
+                        dictionary[key] = int(row[key])
                     instances.append(cls.create(**dictionary))
         return instances
