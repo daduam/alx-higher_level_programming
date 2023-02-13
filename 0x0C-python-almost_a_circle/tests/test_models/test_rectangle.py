@@ -53,6 +53,8 @@ class TestRectangle(unittest.TestCase):
 
     def test_constructor_only_positional_arguments(self):
         """Test rectangle constructor with only positional arguments."""
+        Base._Base__nb_objects = 0
+
         r1 = Rectangle(1, 2)
         self.assertEqual(r1.width, 1)
         self.assertEqual(r1.height, 2)
@@ -62,6 +64,8 @@ class TestRectangle(unittest.TestCase):
 
     def test_constructor_with_one_keyword_argument(self):
         """Test rectangle constructor with one keyword argument."""
+        Base._Base__nb_objects = 0
+
         r1 = Rectangle(1, 2, x=3)
         self.assertEqual(r1.width, 1)
         self.assertEqual(r1.height, 2)
@@ -85,6 +89,8 @@ class TestRectangle(unittest.TestCase):
 
     def test_constructor_with_two_keyword_arguments(self):
         """Test constructor with two keyword arguments."""
+        Base._Base__nb_objects = 0
+
         r1 = Rectangle(1, 2, x=3, y=4)
         self.assertEqual(r1.width, 1)
         self.assertEqual(r1.height, 2)
@@ -196,3 +202,13 @@ class TestRectangle(unittest.TestCase):
         with redirect_stdout(io.StringIO()) as f:
             r4.display()
         self.assertEqual(f.getvalue(), " ###\n ###\n")
+
+    def test__str__method_override(self):
+        """Test __str__ method override"""
+        Base._Base__nb_objects = 0
+
+        r1 = Rectangle(4, 6, 2, 1, 12)
+        self.assertEqual(str(r1), "[Rectangle] (12) 2/1 - 4/6")
+
+        r2 = Rectangle(5, 5, 1)
+        self.assertEqual(str(r2), "[Rectangle] (1) 1/0 - 5/5")
