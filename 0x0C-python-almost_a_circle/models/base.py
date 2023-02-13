@@ -5,6 +5,9 @@
 import json
 import os
 import csv
+import turtle
+import time
+from random import randrange
 
 
 class Base:
@@ -94,3 +97,26 @@ class Base:
                     dictionary = {key: int(row[key]) for key in fieldnames}
                     instances.append(cls.create(**dictionary))
         return instances
+
+    @staticmethod
+    def draw(list_rectangles, list_squares):
+        """Opens a window and draws all the rectangles and squares."""
+        turtle.Screen().colormode(255)
+        for i in list_rectangles + list_squares:
+            t = turtle.Turtle()
+            t.color((randrange(255), randrange(255), randrange(255)))
+            t.up()
+            t.down()
+            t.setpos((i.x - t.pos()[0], i.y + t.pos()[1]))
+            t.pensize(4)
+            t.fd(i.width)
+            t.lt(90)
+            t.fd(i.height)
+            t.lt(90)
+            t.fd(i.width)
+            t.lt(90)
+            t.fd(i.height)
+            t.lt(90)
+            t.end_fill()
+
+        time.sleep(5)
