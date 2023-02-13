@@ -159,7 +159,3 @@ class TestRectangle(unittest.TestCase):
 
         with self.assertRaisesRegex(ValueError, "y must be >= 0"):
             r1.y = -3
-
-
-if __name__ == "__main__":
-    unittest.main()

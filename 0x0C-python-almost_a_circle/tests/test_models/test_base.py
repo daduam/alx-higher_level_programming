@@ -24,7 +24,3 @@ class TestBase(unittest.TestCase):
         self.assertEqual(self.b1.id, 1)
         self.assertEqual(self.b2.id, 25)
         self.assertDictEqual(self.b1.__dict__, {'id': 1})
-
-
-if __name__ == "__main__":
-    unittest.main()
