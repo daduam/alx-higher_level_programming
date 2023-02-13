@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """Test Rectangle"""
 
+from contextlib import redirect_stdout
+import io
 import unittest
 
 from models.base import Base
@@ -172,3 +174,25 @@ class TestRectangle(unittest.TestCase):
 
         r3 = Rectangle(8, 7, 0, 0, 12)
         self.assertEqual(r3.area(), 56)
+
+    def test_display_public_method(self):
+        """Test display public method."""
+        r1 = Rectangle(4, 6)
+        with redirect_stdout(io.StringIO()) as f:
+            r1.display()
+        self.assertEqual(f.getvalue(), "####\n####\n####\n####\n####\n####\n")
+
+        r2 = Rectangle(2, 2)
+        with redirect_stdout(io.StringIO()) as f:
+            r2.display()
+        self.assertEqual(f.getvalue(), "##\n##\n")
+
+        r3 = Rectangle(2, 3, 2, 2)
+        with redirect_stdout(io.StringIO()) as f:
+            r3.display()
+        self.assertEqual(f.getvalue(), "\n\n  ##\n  ##\n  ##\n")
+
+        r4 = Rectangle(3, 2, 1, 0)
+        with redirect_stdout(io.StringIO()) as f:
+            r4.display()
+        self.assertEqual(f.getvalue(), " ###\n ###\n")
