@@ -118,6 +118,48 @@ class TestRectangle(unittest.TestCase):
                                            '_Rectangle__x': 3,
                                            '_Rectangle__y': 4})
 
+    def test_width_and_height_setter_validation(self):
+        """Test width and height setter validation."""
+        r1 = Rectangle(1, 2)
+
+        bad_values = ["1", [1], (1,), {1}, dict()]
+
+        for value in bad_values:
+            with self.assertRaisesRegex(TypeError,
+                                        "width must be an integer"):
+                r1.width = value
+            with self.assertRaisesRegex(TypeError,
+                                        "height must be an integer"):
+                r1.height = value
+
+        with self.assertRaisesRegex(ValueError, "width must be > 0"):
+            r1.width = 0
+        with self.assertRaisesRegex(ValueError, "width must be > 0"):
+            r1.width = -3
+
+        with self.assertRaisesRegex(ValueError, "height must be > 0"):
+            r1.height = 0
+        with self.assertRaisesRegex(ValueError, "height must be > 0"):
+            r1.height = -3
+
+    def test_x_and_y_setter_validation(self):
+        """Test width and height setter validation."""
+        r1 = Rectangle(1, 2)
+
+        bad_values = ["1", [1], (1,), {1}, dict()]
+
+        for value in bad_values:
+            with self.assertRaisesRegex(TypeError, "x must be an integer"):
+                r1.x = value
+            with self.assertRaisesRegex(TypeError, "y must be an integer"):
+                r1.y = value
+
+        with self.assertRaisesRegex(ValueError, "x must be >= 0"):
+            r1.x = -3
+
+        with self.assertRaisesRegex(ValueError, "y must be >= 0"):
+            r1.y = -3
+
 
 if __name__ == "__main__":
     unittest.main()
