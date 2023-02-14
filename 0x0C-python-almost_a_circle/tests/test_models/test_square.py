@@ -14,3 +14,8 @@ class TestSquare(unittest.TestCase):
     def test_square_in_correct_module(self):
         """Test Square in correct module."""
         self.assertEqual(str(Square), "<class 'models.square.Square'>")
+
+    def test_square_inheritance(self):
+        """Test Square inheritance"""
+        self.assertTrue(issubclass(Square, Rectangle))
+        self.assertTrue(issubclass(Square, Base))
