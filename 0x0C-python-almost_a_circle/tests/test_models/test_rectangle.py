@@ -170,7 +170,7 @@ class TestRectangle(unittest.TestCase):
 
     def test_area_public_method(self):
         """Test area public method."""
-        self.assertIn('area', dir(Rectangle))
+        self.assertIn("area", dir(Rectangle))
 
         r1 = Rectangle(3, 2)
         self.assertEqual(r1.area(), 6)
@@ -183,6 +183,8 @@ class TestRectangle(unittest.TestCase):
 
     def test_display_public_method(self):
         """Test display public method."""
+        self.assertIn("display", dir(Rectangle))
+
         r1 = Rectangle(4, 6)
         with redirect_stdout(io.StringIO()) as f:
             r1.display()
@@ -212,3 +214,63 @@ class TestRectangle(unittest.TestCase):
 
         r2 = Rectangle(5, 5, 1)
         self.assertEqual(str(r2), "[Rectangle] (1) 1/0 - 5/5")
+
+    def test_update_public_method_with_args(self):
+        """Test Rectangle update public method with *args."""
+        Base._Base__nb_objects = 0
+
+        self.assertIn("update", dir(Rectangle))
+
+        r1 = Rectangle(10, 10, 10, 10)
+        self.assertEqual(str(r1), "[Rectangle] (1) 10/10 - 10/10")
+
+        r1.update(89)
+        self.assertEqual(str(r1), "[Rectangle] (89) 10/10 - 10/10")
+
+        r1.update(89, 2)
+        self.assertEqual(str(r1), "[Rectangle] (89) 10/10 - 2/10")
+
+        r1.update(89, 2, 3)
+        self.assertEqual(str(r1), "[Rectangle] (89) 10/10 - 2/3")
+
+        r1.update(89, 2, 3, 4)
+        self.assertEqual(str(r1), "[Rectangle] (89) 4/10 - 2/3")
+
+        r1.update(89, 2, 3, 4, 5)
+        self.assertEqual(str(r1), "[Rectangle] (89) 4/5 - 2/3")
+
+    def test_update_public_method_with_kwargs(self):
+        """Test Rectangle update public method with **kwargs."""
+        Base._Base__nb_objects = 0
+
+        self.assertIn("update", dir(Rectangle))
+
+        r1 = Rectangle(10, 10, 10, 10)
+        self.assertEqual(str(r1), "[Rectangle] (1) 10/10 - 10/10")
+
+        r1.update(height=1)
+        self.assertEqual(str(r1), "[Rectangle] (1) 10/10 - 10/1")
+
+        r1.update(width=1, x=2)
+        self.assertEqual(str(r1), "[Rectangle] (1) 2/10 - 1/1")
+
+        r1.update(y=1, width=2, x=3, id=89)
+        self.assertEqual(str(r1), "[Rectangle] (89) 3/1 - 2/1")
+
+        r1.update(x=1, height=2, y=3, width=4)
+        self.assertEqual(str(r1), "[Rectangle] (89) 1/3 - 4/2")
+
+    def test_update_skip_kwargs_if_args_exists_and_is_not_empty(self):
+        """Test update skip kwargs if args exists and is not empty."""
+        Base._Base__nb_objects = 0
+
+        self.assertIn("update", dir(Rectangle))
+
+        r1 = Rectangle(10, 10, 10, 10)
+        self.assertEqual(str(r1), "[Rectangle] (1) 10/10 - 10/10")
+
+        args = [1, 2, 3, 4, 5]
+        kwargs = {"id": 6, "width": 7, "height": 8, "x": 9, "y": 10}
+
+        r1.update(*args, **kwargs)
+        self.assertEqual(str(r1), "[Rectangle] (1) 4/5 - 2/3")
