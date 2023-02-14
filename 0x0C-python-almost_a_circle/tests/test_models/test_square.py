@@ -211,3 +211,22 @@ class TestSquare(unittest.TestCase):
         with redirect_stdout(io.StringIO()) as f:
             sq4.display()
         self.assertEqual(f.getvalue(), "\n  ###\n  ###\n  ###\n")
+
+    def test__str__method_override(self):
+        """Test __str__ method override"""
+        Base._Base__nb_objects = 0
+
+        sq1 = Square(6, 2, 1, 12)
+        self.assertEqual(str(sq1), "[Square] (12) 2/1 - 6")
+
+        sq2 = Square(5, 1)
+        self.assertEqual(str(sq2), "[Square] (1) 1/0 - 5")
+
+        sq3 = Square(5)
+        self.assertEqual(str(sq3), "[Square] (2) 0/0 - 5")
+
+        sq4 = Square(2, 2)
+        self.assertEqual(str(sq4), "[Square] (3) 2/0 - 2")
+
+        sq5 = Square(3, 1, 3)
+        self.assertEqual(str(sq5), "[Square] (4) 1/3 - 3")
