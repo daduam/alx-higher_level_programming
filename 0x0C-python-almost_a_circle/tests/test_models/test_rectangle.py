@@ -14,8 +14,7 @@ class TestRectangle(unittest.TestCase):
 
     def test_rectangle_in_correct_module(self):
         """Test Rectangle in correct module."""
-        r1 = Rectangle(1, 2)
-        self.assertEqual(str(type((r1))),
+        self.assertEqual(str(Rectangle),
                          "<class 'models.rectangle.Rectangle'>")
 
     def test_rectangle_inherits_from_base(self):

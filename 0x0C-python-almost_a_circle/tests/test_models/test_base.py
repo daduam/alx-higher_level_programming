@@ -16,8 +16,7 @@ class TestBase(unittest.TestCase):
 
     def test_base_in_correct_module(self):
         """Test Base in correct module."""
-        b1 = Base()
-        self.assertEqual(str(type((b1))), "<class 'models.base.Base'>")
+        self.assertEqual(str(Base), "<class 'models.base.Base'>")
 
     def test_Base__nb_objects(self):
         """Checks if __nb_objects attribute is present and initialized."""

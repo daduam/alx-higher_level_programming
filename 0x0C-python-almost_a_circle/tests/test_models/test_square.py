@@ -13,5 +13,4 @@ class TestSquare(unittest.TestCase):
 
     def test_square_in_correct_module(self):
         """Test Square in correct module."""
-        sq = Square(1)
-        self.assertEqual(str(type((sq))), "<class 'models.square.Square'>")
+        self.assertEqual(str(Square), "<class 'models.square.Square'>")
