@@ -1,9 +1,12 @@
 #!/usr/bin/python3
 """Test Base"""
 
+import os
 import unittest
 
 from models.base import Base
+from models.rectangle import Rectangle
+from models.square import Square
 
 
 class TestBase(unittest.TestCase):
@@ -47,3 +50,46 @@ class TestBase(unittest.TestCase):
         result = Base.to_json_string(list_dictionaries)
         expected = str(list_dictionaries).replace("'", '"')
         self.assertEqual(result, expected)
+
+    def test_save_to_file_class_method(self):
+        """Test save_to_file class method."""
+        self.assertIn("save_to_file", dir(Base))
+
+        rectangle_json_filename = "Rectangle.json"
+        square_json_filename = "Square.json"
+
+        Rectangle.save_to_file(None)
+        with open(rectangle_json_filename, "r") as f:
+            result = f.read()
+        expected = "[]"
+        self.assertEqual(result, expected)
+
+        Square.save_to_file(None)
+        with open(square_json_filename, "r") as f:
+            result = f.read()
+        expected = "[]"
+        self.assertEqual(result, expected)
+
+        sq1 = Rectangle(10, 7, 2, 8)
+        sq2 = Rectangle(2, 4)
+        Rectangle.save_to_file([sq1, sq2])
+        with open(rectangle_json_filename, "r") as f:
+            result = f.read()
+        expected = Base.to_json_string(
+            [sq1.to_dictionary(), sq2.to_dictionary()])
+        self.assertEqual(result, expected)
+
+        sq1 = Square(10, 7, 2)
+        sq2 = Square(2)
+        Square.save_to_file([sq1, sq2])
+        with open(square_json_filename, "r") as f:
+            result = f.read()
+        expected = Base.to_json_string(
+            [sq1.to_dictionary(), sq2.to_dictionary()])
+        self.assertEqual(result, expected)
+
+        if os.path.exists(rectangle_json_filename):
+            os.remove(rectangle_json_filename)
+
+        if os.path.exists(square_json_filename):
+            os.remove(square_json_filename)
