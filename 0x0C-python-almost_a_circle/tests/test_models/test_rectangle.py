@@ -279,3 +279,23 @@ class TestRectangle(unittest.TestCase):
 
         r1.update(*args, **kwargs)
         self.assertEqual(str(r1), "[Rectangle] (1) 4/5 - 2/3")
+
+    def test_to_dictionary_public_method(self):
+        """Test to_dictionary public method."""
+        Base._Base__nb_objects = 0
+
+        self.assertIn("to_dictionary", dir(Rectangle))
+
+        r1 = Rectangle(10, 2, 1, 9)
+        self.assertDictEqual(r1.to_dictionary(), {'id': 1,
+                                                  'width': 10,
+                                                  'height': 2,
+                                                  'x': 1,
+                                                  'y': 9})
+
+        r2 = Rectangle(1, 1)
+        self.assertDictEqual(r2.to_dictionary(), {'id': 2,
+                                                  'width': 1,
+                                                  'height': 1,
+                                                  'x': 0,
+                                                  'y': 0})
