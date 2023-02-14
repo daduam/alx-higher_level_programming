@@ -169,3 +169,19 @@ class TestSquare(unittest.TestCase):
 
         with self.assertRaisesRegex(ValueError, "y must be >= 0"):
             sq.y = -3
+
+    def test_area_public_method(self):
+        """Test area public method."""
+        self.assertIn("area", dir(Square))
+
+        sq1 = Square(5)
+        self.assertEqual(sq1.area(), 25)
+
+        sq2 = Square(2, 2)
+        self.assertEqual(sq2.area(), 4)
+
+        sq3 = Square(3, 1, 3)
+        self.assertEqual(sq3.area(), 9)
+
+        sq4 = Square(8, 0, 0, 12)
+        self.assertEqual(sq4.area(), 64)
