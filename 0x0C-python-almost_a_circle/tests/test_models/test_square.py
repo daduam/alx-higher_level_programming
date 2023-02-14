@@ -47,3 +47,83 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(sq.height, 2)
         self.assertEqual(sq.x, 3)
         self.assertEqual(sq.y, 4)
+
+    def test_constructor_wrong_number_of_arguments(self):
+        """Test Square constructor with wrong number of arguments"""
+        with self.assertRaises(TypeError):
+            Square()
+
+    def test_constructor_only_size_positional_argument(self):
+        """Test Square constructor with only size positional argument."""
+        Base._Base__nb_objects = 0
+
+        sq = Square(1)
+        self.assertEqual(sq.width, 1)
+        self.assertEqual(sq.height, 1)
+        self.assertEqual(sq.x, 0)
+        self.assertEqual(sq.y, 0)
+        self.assertEqual(sq.id, getattr(Base, "_Base__nb_objects"))
+
+    def test_constructor_with_one_keyword_argument(self):
+        """Test Square constructor with one keyword argument."""
+        Base._Base__nb_objects = 0
+
+        sq1 = Square(1, x=2)
+        self.assertEqual(sq1.width, 1)
+        self.assertEqual(sq1.height, 1)
+        self.assertEqual(sq1.x, 2)
+        self.assertEqual(sq1.y, 0)
+        self.assertEqual(sq1.id, getattr(Base, "_Base__nb_objects"))
+
+        sq2 = Square(1, y=2)
+        self.assertEqual(sq2.width, 1)
+        self.assertEqual(sq2.height, 1)
+        self.assertEqual(sq2.x, 0)
+        self.assertEqual(sq2.y, 2)
+        self.assertEqual(sq2.id, getattr(Base, "_Base__nb_objects"))
+
+        sq3 = Square(1, id=25)
+        self.assertEqual(sq3.width, 1)
+        self.assertEqual(sq3.height, 1)
+        self.assertEqual(sq3.x, 0)
+        self.assertEqual(sq3.y, 0)
+        self.assertEqual(sq3.id, 25)
+
+    def test_constructor_with_two_keyword_arguments(self):
+        """Test constructor with two keyword arguments."""
+        Base._Base__nb_objects = 0
+
+        sq1 = Square(1, x=2, y=3)
+        self.assertEqual(sq1.width, 1)
+        self.assertEqual(sq1.height, 1)
+        self.assertEqual(sq1.x, 2)
+        self.assertEqual(sq1.y, 3)
+        self.assertEqual(sq1.id, getattr(Base, "_Base__nb_objects"))
+
+        sq2 = Square(1, x=2, id=25)
+        self.assertEqual(sq2.width, 1)
+        self.assertEqual(sq2.height, 1)
+        self.assertEqual(sq2.x, 2)
+        self.assertEqual(sq2.y, 0)
+        self.assertEqual(sq2.id, 25)
+
+        sq3 = Square(1, y=2, id=25)
+        self.assertEqual(sq3.width, 1)
+        self.assertEqual(sq3.height, 1)
+        self.assertEqual(sq3.x, 0)
+        self.assertEqual(sq3.y, 2)
+        self.assertEqual(sq3.id, 25)
+
+    def test_constructor_with_all_arguments(self):
+        """Test constructor with all arguments."""
+        sq = Square(1, x=2, y=3, id=25)
+        self.assertEqual(sq.width, 1)
+        self.assertEqual(sq.height, 1)
+        self.assertEqual(sq.x, 2)
+        self.assertEqual(sq.y, 3)
+        self.assertEqual(sq.id, 25)
+        self.assertDictEqual(sq.__dict__, {'id': 25,
+                                           '_Rectangle__width': 1,
+                                           '_Rectangle__height': 1,
+                                           '_Rectangle__x': 2,
+                                           '_Rectangle__y': 3})
