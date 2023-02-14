@@ -253,5 +253,5 @@ class TestSquare(unittest.TestCase):
 
         sq.size = 34
         self.assertEqual(sq.size, 34)
-        self.assertEqual(sq.size, sq.width)
-        self.assertEqual(sq.size, sq.height)
+        self.assertEqual(sq.width, 34)
+        self.assertEqual(sq.height, 34)
