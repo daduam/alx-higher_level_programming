@@ -312,3 +312,21 @@ class TestSquare(unittest.TestCase):
 
         sq.update(*args, **kwargs)
         self.assertEqual(str(sq), "[Square] (1) 3/4 - 2")
+
+    def test_to_dictionary_public_method(self):
+        """Test to_dictionary public method."""
+        Base._Base__nb_objects = 0
+
+        self.assertIn("to_dictionary", dir(Square))
+
+        sq1 = Square(10, 2, 1)
+        self.assertDictEqual(sq1.to_dictionary(), {'id': 1,
+                                                   'size': 10,
+                                                   'x': 2,
+                                                   'y': 1})
+
+        sq2 = Square(1, 1)
+        self.assertDictEqual(sq2.to_dictionary(), {'id': 2,
+                                                   'size': 1,
+                                                   'x': 1,
+                                                   'y': 0})
