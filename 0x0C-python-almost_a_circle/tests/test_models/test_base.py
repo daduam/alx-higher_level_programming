@@ -112,3 +112,21 @@ class TestBase(unittest.TestCase):
         result = Base.from_json_string(json_string)
         for i in range(len(expected)):
             self.assertDictEqual(expected[i], result[i])
+
+    def test_create_class_method(self):
+        """Test create class method."""
+        self.assertIn("create", dir(Base))
+
+        r1 = Rectangle(3, 5, 1)
+        r2 = Rectangle.create(**r1.to_dictionary())
+        self.assertDictEqual(r1.to_dictionary(), r2.to_dictionary())
+        self.assertEqual(str(r1), str(r2))
+        self.assertNotEqual(r1, r2)
+        self.assertTrue(r1 is not r2)
+
+        sq1 = Square(3, 5, 1)
+        sq2 = Square.create(**sq1.to_dictionary())
+        self.assertDictEqual(sq1.to_dictionary(), sq2.to_dictionary())
+        self.assertEqual(str(sq1), str(sq2))
+        self.assertNotEqual(sq1, sq2)
+        self.assertTrue(sq1 is not sq2)
