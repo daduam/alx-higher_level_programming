@@ -255,3 +255,60 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(sq.size, 34)
         self.assertEqual(sq.width, 34)
         self.assertEqual(sq.height, 34)
+
+    def test_update_public_method_with_args(self):
+        """Test Rectangle update public method with *args."""
+        Base._Base__nb_objects = 0
+
+        self.assertIn("update", dir(Square))
+
+        sq = Square(10, 10, 10)
+        self.assertEqual(str(sq), "[Square] (1) 10/10 - 10")
+
+        sq.update(89)
+        self.assertEqual(str(sq), "[Square] (89) 10/10 - 10")
+
+        sq.update(89, 2)
+        self.assertEqual(str(sq), "[Square] (89) 10/10 - 2")
+
+        sq.update(89, 2, 3)
+        self.assertEqual(str(sq), "[Square] (89) 3/10 - 2")
+
+        sq.update(89, 2, 3, 4)
+        self.assertEqual(str(sq), "[Square] (89) 3/4 - 2")
+
+    def test_update_public_method_with_kwargs(self):
+        """Test Square update public method with **kwargs."""
+        Base._Base__nb_objects = 0
+
+        self.assertIn("update", dir(Square))
+
+        sq = Square(10, 10, 10)
+        self.assertEqual(str(sq), "[Square] (1) 10/10 - 10")
+
+        sq.update(size=1)
+        self.assertEqual(str(sq), "[Square] (1) 10/10 - 1")
+
+        sq.update(size=1, x=2)
+        self.assertEqual(str(sq), "[Square] (1) 2/10 - 1")
+
+        sq.update(y=1, size=2, x=3, id=89)
+        self.assertEqual(str(sq), "[Square] (89) 3/1 - 2")
+
+        sq.update(x=1, size=2, y=3)
+        self.assertEqual(str(sq), "[Square] (89) 1/3 - 2")
+
+    def test_update_skip_kwargs_if_args_exists_and_is_not_empty(self):
+        """Test update skip kwargs if args exists and is not empty."""
+        Base._Base__nb_objects = 0
+
+        self.assertIn("update", dir(Square))
+
+        sq = Square(10, 10, 10)
+        self.assertEqual(str(sq), "[Square] (1) 10/10 - 10")
+
+        args = [1, 2, 3, 4]
+        kwargs = {"id": 6, "size": 7, "x": 8, "y": 9}
+
+        sq.update(*args, **kwargs)
+        self.assertEqual(str(sq), "[Square] (1) 3/4 - 2")
