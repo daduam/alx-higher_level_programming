@@ -93,3 +93,22 @@ class TestBase(unittest.TestCase):
 
         if os.path.exists(square_json_filename):
             os.remove(square_json_filename)
+
+    def test_from_json_string_static_method(self):
+        """Test from_json_string static method."""
+        self.assertIn("from_json_string", dir(Base))
+
+        result = Base.from_json_string(None)
+        self.assertEqual(result, [])
+
+        result = Base.from_json_string("")
+        self.assertEqual(result, [])
+
+        expected = [{"x": 1, "y": 2},
+                    {'id': 89, 'width': 10, 'height': 4},
+                    {'id': 7, 'width': 1, 'height': 7},
+                    {"x": 1, "y": 2, "width": 3, "height": 4}]
+        json_string = Base.to_json_string(expected)
+        result = Base.from_json_string(json_string)
+        for i in range(len(expected)):
+            self.assertDictEqual(expected[i], result[i])
