@@ -130,3 +130,38 @@ class TestBase(unittest.TestCase):
         self.assertEqual(str(sq1), str(sq2))
         self.assertNotEqual(sq1, sq2)
         self.assertTrue(sq1 is not sq2)
+
+    def test_load_from_file_class_method(self):
+        """Test load_from_file class method."""
+        self.assertIn("load_from_file", dir(Base))
+
+        rectangle_json_filename = "Rectangle.json"
+        square_json_filename = "Square.json"
+
+        if os.path.exists(rectangle_json_filename):
+            os.remove(rectangle_json_filename)
+
+        result = Rectangle.load_from_file()
+        self.assertEqual(result, [])
+
+        if os.path.exists(square_json_filename):
+            os.remove(square_json_filename)
+
+        result = Square.load_from_file()
+        self.assertEqual(result, [])
+
+        r1 = Rectangle(10, 7, 2, 8)
+        r2 = Rectangle(2, 4)
+        expected = [r1, r2]
+        Rectangle.save_to_file(expected)
+        result = Rectangle.load_from_file()
+        for i in range(len(expected)):
+            self.assertEqual(str(expected[i]), str(result[i]))
+
+        sq1 = Square(5)
+        sq2 = Square(7, 9, 1)
+        expected = [sq1, sq2]
+        Square.save_to_file(expected)
+        result = Square.load_from_file()
+        for i in range(len(expected)):
+            self.assertEqual(str(expected[i]), str(result[i]))
