@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """Test Square"""
 
+from contextlib import redirect_stdout
+import io
 import unittest
 
 from models.base import Base
@@ -185,3 +187,27 @@ class TestSquare(unittest.TestCase):
 
         sq4 = Square(8, 0, 0, 12)
         self.assertEqual(sq4.area(), 64)
+
+    def test_display_public_method(self):
+        """Test display public method."""
+        self.assertIn("display", dir(Square))
+
+        sq1 = Square(4)
+        with redirect_stdout(io.StringIO()) as f:
+            sq1.display()
+        self.assertEqual(f.getvalue(), "####\n####\n####\n####\n")
+
+        sq2 = Square(2)
+        with redirect_stdout(io.StringIO()) as f:
+            sq2.display()
+        self.assertEqual(f.getvalue(), "##\n##\n")
+
+        sq3 = Square(2, 3, 2)
+        with redirect_stdout(io.StringIO()) as f:
+            sq3.display()
+        self.assertEqual(f.getvalue(), "\n\n   ##\n   ##\n")
+
+        sq4 = Square(3, 2, 1)
+        with redirect_stdout(io.StringIO()) as f:
+            sq4.display()
+        self.assertEqual(f.getvalue(), "\n  ###\n  ###\n  ###\n")
