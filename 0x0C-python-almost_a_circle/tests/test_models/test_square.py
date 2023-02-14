@@ -230,3 +230,28 @@ class TestSquare(unittest.TestCase):
 
         sq5 = Square(3, 1, 3)
         self.assertEqual(sq5.__str__(), "[Square] (4) 1/3 - 3")
+
+    def test_square_size_getter(self):
+        """Test Square size getter."""
+        sq = Square(1)
+        self.assertEqual(sq.size, sq.width)
+        self.assertEqual(sq.size, sq.height)
+        self.assertEqual(sq.size, 1)
+
+    def test_square_size_setter(self):
+        """Test Square size setter"""
+        sq = Square(1)
+
+        with self.assertRaisesRegex(TypeError, "width must be an integer"):
+            sq.size = "13"
+
+        with self.assertRaisesRegex(ValueError, "width must be > 0"):
+            sq.size = 0
+
+        with self.assertRaisesRegex(ValueError, "width must be > 0"):
+            sq.size = -12
+
+        sq.size = 34
+        self.assertEqual(sq.size, 34)
+        self.assertEqual(sq.size, sq.width)
+        self.assertEqual(sq.size, sq.height)
