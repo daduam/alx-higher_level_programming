@@ -70,13 +70,13 @@ class TestBase(unittest.TestCase):
         expected = "[]"
         self.assertEqual(result, expected)
 
-        sq1 = Rectangle(10, 7, 2, 8)
-        sq2 = Rectangle(2, 4)
-        Rectangle.save_to_file([sq1, sq2])
+        r1 = Rectangle(10, 7, 2, 8)
+        r2 = Rectangle(2, 4)
+        Rectangle.save_to_file([r1, r2])
         with open(rectangle_json_filename, "r") as f:
             result = f.read()
         expected = Base.to_json_string(
-            [sq1.to_dictionary(), sq2.to_dictionary()])
+            [r1.to_dictionary(), r2.to_dictionary()])
         self.assertEqual(result, expected)
 
         sq1 = Square(10, 7, 2)
@@ -167,3 +167,41 @@ class TestBase(unittest.TestCase):
 
         if os.path.exists(square_json_filename):
             os.remove(square_json_filename)
+
+    def test_save_to_file_csv_class_method(self):
+        """Test save_to_file_csv class method."""
+        self.assertIn("save_to_file_csv", dir(Base))
+
+        Base._Base__nb_objects = 0
+
+        rectangle_csv_filename = "Rectangle.csv"
+        square_csv_filename = "Square.csv"
+
+        Rectangle.save_to_file_csv(None)
+        with open(rectangle_csv_filename, "r") as f:
+            result = f.read()
+        expected = "id,width,height,x,y\n"
+        self.assertEqual(result, expected)
+
+        Square.save_to_file_csv(None)
+        with open(square_csv_filename, "r") as f:
+            result = f.read()
+        expected = "id,size,x,y\n"
+        self.assertEqual(result, expected)
+
+        r1 = Rectangle(10, 7, 2, 8)
+        r2 = Rectangle(2, 4)
+        Rectangle.save_to_file_csv([r1, r2])
+        with open(rectangle_csv_filename, "r") as f:
+            result = f.read()
+        expected = \
+            "id,width,height,x,y\n{},{},{},{},{}\n{},{},{},{},{}\n".format(
+                r1.id, r1.width, r1.height, r1.x, r1.y,
+                r2.id, r2.width, r2.height, r2.x, r2.y)
+        self.assertEqual(result, expected)
+
+        if os.path.exists(rectangle_csv_filename):
+            os.remove(rectangle_csv_filename)
+
+        if os.path.exists(square_csv_filename):
+            os.remove(square_csv_filename)
