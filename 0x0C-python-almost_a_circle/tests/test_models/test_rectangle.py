@@ -12,6 +12,12 @@ from models.rectangle import Rectangle
 class TestRectangle(unittest.TestCase):
     """Defines unit tests for Rectangle class."""
 
+    def test_rectangle_in_correct_module(self):
+        """Test Rectangle in correct module."""
+        r1 = Rectangle(1, 2)
+        self.assertEqual(str(type((r1))),
+                         "<class 'models.rectangle.Rectangle'>")
+
     def test_rectangle_inherits_from_base(self):
         """Test Rectangle inherits from Base."""
         self.assertTrue(issubclass(Rectangle, Base))
