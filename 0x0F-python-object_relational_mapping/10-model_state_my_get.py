@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Fetch all states with `a` in name"""
+"""Prints the State object of supplied state name"""
 
 import sys
 
@@ -14,8 +14,9 @@ if __name__ == "__main__":
     Base.metadata.create_all(engine)
 
     session = Session(engine)
-    states = session.query(State).filter(
-        State.name.like("%a%")).order_by(State.id).all()
-    for state in states:
-        print("{}: {}".format(state.id, state.name))
+    state = session.query(State).filter(State.name == sys.argv[4]).first()
+    if state is None:
+        print("Not found")
+    else:
+        print(state.id)
     session.close()
